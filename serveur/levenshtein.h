@@ -3,6 +3,6 @@
 
 #include <stddef.h>
 
-size_t calculDistance(const char *texte, const char *data);
+size_t calculDistance(const char *texte, const char *data, size_t *longueurMax);
 
 #endif 

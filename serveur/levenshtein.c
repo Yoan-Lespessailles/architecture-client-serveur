@@ -7,39 +7,50 @@
 
 #include "levenshtein.h"
 
-static void enMinuscules(char *str){
-    for (size_t i = 0; str[i] != '\0'; i++) {
+static void enMinuscules(char *str)
+{
+    for (size_t i = 0; str[i] != '\0'; i++)
+    {
         str[i] = (char)tolower((unsigned char)str[i]);
     }
 }
 
-static void enleverEspacesSuperflus(char *str){
+static void enleverEspacesSuperflus(char *str)
+{
     size_t j = 0;
     int dansEspace = 1;
 
-    for (size_t i = 0; str[i] != '\0'; i++) {
-        if (isspace((unsigned char)str[i])) {
-            if (!dansEspace) {
+    for (size_t i = 0; str[i] != '\0'; i++)
+    {
+        if (isspace((unsigned char)str[i]))
+        {
+            if (!dansEspace)
+            {
                 str[j++] = ' ';
                 dansEspace = 1;
             }
-        } else {
+        }
+        else
+        {
             str[j++] = str[i];
             dansEspace = 0;
         }
     }
 
-    if (j > 0 && str[j - 1] == ' ') {
+    if (j > 0 && str[j - 1] == ' ')
+    {
         j--;
     }
     str[j] = '\0';
 }
 
-static char *copierEtFormater(const char *str){
-    size_t taille = strlen(str) + 1;  /* Inclut le '\0'. */
+static char *copierEtFormater(const char *str)
+{
+    size_t taille = strlen(str) + 1; /* Inclut le '\0'. */
     char *copie = malloc(taille);
 
-    if (copie != NULL) {
+    if (copie != NULL)
+    {
         memcpy(copie, str, taille);
         enMinuscules(copie);
         enleverEspacesSuperflus(copie);
@@ -48,11 +59,13 @@ static char *copierEtFormater(const char *str){
     return copie;
 }
 
-static size_t minimum(size_t a, size_t b){
+static size_t minimum(size_t a, size_t b)
+{
     return a < b ? a : b;
 }
 
-size_t calculDistance(const char *texte, const char *data){
+size_t calculDistance(const char *texte, const char *data, size_t *longueurMax)
+{
     /* Créer des copies pour mettre les textes en forme sans toucher aux originaux. */
     char *texteFormate = copierEtFormater(texte);
     char *dataFormate = copierEtFormater(data);
@@ -64,7 +77,8 @@ size_t calculDistance(const char *texte, const char *data){
     /* Cette valeur reste en place si on doit quitter la fonction sur une erreur. */
     size_t distance = SIZE_MAX;
 
-    if (texteFormate == NULL || dataFormate == NULL) {
+    if (texteFormate == NULL || dataFormate == NULL)
+    {
         goto nettoyage;
     }
 
@@ -72,8 +86,12 @@ size_t calculDistance(const char *texte, const char *data){
     size_t longueurTexte = strlen(texteFormate);
     size_t longueurData = strlen(dataFormate);
 
+    /* Transmettre au serveur la plus grande longueur après mise en forme. */
+    *longueurMax = (longueurTexte > longueurData) ? longueurTexte : longueurData;
+
     /* Vérifier que la taille d'une ligne, en octets, tient dans un size_t. */
-    if (longueurData >= SIZE_MAX / sizeof *lignePrecedente) {
+    if (longueurData >= SIZE_MAX / sizeof *lignePrecedente)
+    {
         goto nettoyage;
     }
 
@@ -81,22 +99,26 @@ size_t calculDistance(const char *texte, const char *data){
     lignePrecedente = malloc((longueurData + 1) * sizeof *lignePrecedente);
     ligneEnCours = malloc((longueurData + 1) * sizeof *ligneEnCours);
 
-    if (lignePrecedente == NULL || ligneEnCours == NULL) {
+    if (lignePrecedente == NULL || ligneEnCours == NULL)
+    {
         goto nettoyage;
     }
 
     /* Remplir la ligne 0. Pour passer du texte vide aux j premiers octets du second texte, il faut j insertions. */
-    for (size_t j = 0; j <= longueurData; j++) {
+    for (size_t j = 0; j <= longueurData; j++)
+    {
         lignePrecedente[j] = j;
     }
 
     /* À chaque tour, on prend un octet de plus dans le premier texte. */
-    for (size_t i = 1; i <= longueurTexte; i++) {
+    for (size_t i = 1; i <= longueurTexte; i++)
+    {
         /* Colonne 0. Pour passer de i octets au texte vide, il faut i suppressions. */
         ligneEnCours[0] = i;
 
         /* Remplir la ligne de gauche à droite. */
-        for (size_t j = 1; j <= longueurData; j++) {
+        for (size_t j = 1; j <= longueurData; j++)
+        {
             /* Case du dessus (i - 1, j). On reprend le coût calculé sans le dernier octet du premier texte et on ajoute 1 pour supprimer cet octet. */
             size_t suppression = lignePrecedente[j] + 1;
 

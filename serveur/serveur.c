@@ -48,7 +48,8 @@ static int traiterClient(int newSocket, const Document *data, int nbFichiers)
 
     for (int i = 0; i < nbFichiers; i++)
     {
-        size_t distance = calculDistance(contenu, data[i].contenu);
+        size_t longueurMax = 0;
+        size_t distance = calculDistance(contenu, data[i].contenu, &longueurMax);
 
         if (distance == SIZE_MAX)
         {
@@ -56,7 +57,15 @@ static int traiterClient(int newSocket, const Document *data, int nbFichiers)
             continue;
         }
 
-        printf("%s : distance = %zu\n", data[i].nom, distance);
+        /* Deux textes vides sont identiques. On évite ainsi de diviser par zéro. */
+        double similarite = 100.0;
+        if (longueurMax > 0)
+        {
+            similarite = 100.0 - (100.0 * distance / longueurMax);
+        }
+
+        printf("%s : similarité = %.2f %% (distance = %zu)\n",
+               data[i].nom, similarite, distance);
     }
 
     free(contenu);
