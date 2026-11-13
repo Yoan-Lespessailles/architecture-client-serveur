@@ -1,6 +1,7 @@
-#include "transfert.h"
 #include <errno.h>
 #include <sys/socket.h>
+
+#include "transfert.h"
 
 int envoyerTout(int socket, const void *donnees, size_t taille)
 {

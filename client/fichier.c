@@ -1,6 +1,7 @@
-#include "fichier.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "fichier.h"
 
 char *lireFichier(const char *chemin, size_t *taille) {
 
