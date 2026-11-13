@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #include "database.h"
 #include "transfert.h"
@@ -125,17 +126,32 @@ int main(void)
 
     printf("\nEn écoute sur 127.0.0.1:7891...\n");
 
-    /*---- Attendre la connexion d'un client ----*/
-    int newSocket = accept(welcomeSocket, NULL, NULL);
-    if (newSocket == -1)
+    while (1)
     {
-        perror("accept");
-        goto nettoyage;
-    }
+        /* Attendre la prochaine connexion. */
+        int newSocket = accept(welcomeSocket, NULL, NULL);
 
-    /*---- Envoyer le message de test au client ----*/
-    resultat = traiterClient(newSocket, data, nbFichiers);
-    close(newSocket);
+        if (newSocket == -1)
+        {
+            if (errno == EINTR)
+            {
+                continue; /* L'attente a été interrompue. On réessaie. */
+            }
+
+            perror("accept");
+            resultat = 1;
+            break; /* Sortir de la boucle et passer au nettoyage. */
+        }
+
+        /* Traiter ce client avant d'accepter le suivant. */
+        if (traiterClient(newSocket, data, nbFichiers) != 0)
+        {
+            fprintf(stderr, "Le traitement du client a échoué.\n");
+        }
+
+        /* Fermer uniquement la connexion de ce client. */
+        close(newSocket);
+    }
 
 nettoyage:
     close(welcomeSocket);
