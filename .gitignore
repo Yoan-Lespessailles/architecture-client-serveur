@@ -1,0 +1,4 @@
+/client
+/serveur
+/test_levenshtein
+*.o

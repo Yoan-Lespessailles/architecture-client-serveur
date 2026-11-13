@@ -1,0 +1,11 @@
+La programmation informatique consiste à écrire des instructions permettant à un ordinateur d'exécuter des tâches.
+
+Le langage C est un langage de programmation utilisé pour développer des logiciels, des systèmes d'exploitation et des applications nécessitant de bonnes performances.
+
+Les programmes informatiques utilisent des variables, des conditions, des boucles et des fonctions pour organiser les traitements.
+
+Le protocole TCP permet de transmettre des données entre deux machines de manière fiable. Il vérifie que les informations arrivent dans le bon ordre et permet de retransmettre les données perdues.
+
+La gestion de la mémoire est une notion importante en programmation C. Le programmeur peut manipuler directement les adresses mémoire à l'aide des pointeurs.
+
+La programmation demande de la rigueur, de la logique et une bonne compréhension des algorithmes.

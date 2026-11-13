@@ -1,0 +1,11 @@
+La sécurité informatique consiste à protéger les systèmes, les réseaux et les données contre les menaces numériques.
+
+La sécurité informatique est un enjeu majeur dans le monde numérique. Les entreprises doivent protéger leurs données contre les accès non autorisés.
+
+Les principales menaces comprennent les virus, les logiciels malveillants, les attaques par hameçonnage et les tentatives d'intrusion.
+
+Le chiffrement permet de rendre les informations illisibles pour les personnes qui ne possèdent pas la clé de déchiffrement.
+
+Les administrateurs informatiques mettent en place des pare-feu, des systèmes de surveillance et des politiques de sécurité pour réduire les risques.
+
+La protection des informations nécessite également une sensibilisation des utilisateurs aux bonnes pratiques.

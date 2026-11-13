@@ -1,0 +1,9 @@
+Les réseaux informatiques permettent à plusieurs ordinateurs de communiquer entre eux. Ils sont utilisés dans les entreprises, les établissements scolaires et les habitations.
+
+Un réseau repose sur différents équipements comme les routeurs, les commutateurs et les serveurs. Chaque équipement joue un rôle dans la transmission des informations.
+
+Le protocole TCP permet de transmettre des données entre deux machines de manière fiable. Il vérifie que les informations arrivent dans le bon ordre et permet de retransmettre les données perdues.
+
+La sécurité informatique est un enjeu majeur dans le monde numérique. Les entreprises doivent protéger leurs données contre les accès non autorisés.
+
+Les réseaux informatiques évoluent constamment pour répondre aux nouveaux besoins des utilisateurs.

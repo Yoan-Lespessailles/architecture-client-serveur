@@ -1,0 +1,7 @@
+Je réalise un projet informatique consacré à la communication entre un client et un serveur.
+
+Le protocole TCP permet de transmettre des données entre deux machines de manière fiable. Il vérifie que les informations arrivent dans le bon ordre et permet de retransmettre les données perdues.
+
+La sécurité informatique est un enjeu majeur dans le monde numérique. Les entreprises doivent protéger leurs données contre les accès non autorisés.
+
+Ce projet me permet de découvrir les sockets et de comprendre comment effectuer des comparaisons entre différents documents.
